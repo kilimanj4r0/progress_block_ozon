@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "century-gothic", sans-serif;
+    font-weight: bold;
+}
+
+.container {
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-flow: column;
+    background: lightgreen;
+}
+
+.card-title {
+    /*w and h based on element*/
+    position: absolute;
+}
+
+.card-body {
+    /* Child */
+    flex: 1 1 auto;
+    /* Parent */
+    display: flex;
+    justify-content: space-between;
+    /* Other */
+    margin: 60px;
+}
+
+.progress-ring {
+    align-self: center;
+}
+
+.progress-controls {
+    align-self: center;
+    display: flex;
+    flex-flow: column;
+}
+
+
+/* For portrait */
+
+@media screen and (orientation: portrait) {
+    .card-body {
+        /* Parent */
+        flex-flow: column;
+    }
+}
+
+
+/* For landscape */
+
+@media screen and (orientation: landscape) {
+    .card-body {
+        /* Parent */
+        flex-flow: row;
+    }
+}
+
+.progress-ring {
+    width: 130px;
+    height: 130px;
+    z-index: 999;
+}
+
+.progress-ring__circle {
+    /* width: 100%;
+    height: 100%; */
+    fill: none;
+    stroke-width: 10px;
+    transform-origin: center;
+    transform: rotate(-90deg);
+}
+
+#progress-ring-circle-back {
+    stroke: white;
+}
+
+#progress-ring-circle {
+    stroke: #005bff;
+}
+
+svg circle:nth-child(2) {
+    stroke-dasharray: 6;
+    stroke-dashoffset: 3;
+}
