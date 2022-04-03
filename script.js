@@ -1,7 +1,9 @@
 const progressRing = document.querySelector('.progress-ring');
+
 const progressCircle = document.querySelector('#progress-ring-circle');
 const radius = progressCircle.getAttribute('r');
 const circumference = 2 * Math.PI * radius;
+
 const progressValueInput = document.querySelector('input[name="progress_value"]');
 const progressAnimateInput = document.querySelector('input[name="progress_animate"]');
 const progressHideInput = document.querySelector('input[name="progress_hide"]');
@@ -15,35 +17,43 @@ const setProgressValue = (value) => {
 setProgressValue(progressValueInput.value);
 progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
 // progressCircle.style.strokeDashoffset = circumference;
+
 // Instantenous changing
 progressValueInput.oninput = () => {
+    progressValueInput.value = parseFloat(progressValueInput.value);
+    if (progressValueInput.value > 100) {
+        progressValueInput.value = 100;
+    } else if (progressValueInput.value < 0) {
+        progressValueInput.value = 0;
+    }
     setProgressValue(progressValueInput.value);
 };
-// Changig after exit the input field
+// Changing after exit the input field
 // progressValueInput.addEventListener('change', () => {
+//     progressValueInput.value = parseFloat(progressValueInput.value);
+//     if (progressValueInput.value > 100) {
+//         progressValueInput.value = 100;
+//     } else if (progressValueInput.value < 0) {
+//         progressValueInput.value = 0;
+//     }
 //     setProgressValue(progressValueInput.value);
 // });
 
 // Animate
 let periodicAnimationTimer;
-let counterToValue = 0;
-let periodicTimeInterval = 1500;
+let periodicTimeInterval = 10;
+let angleDeg = -90;
 progressAnimateInput.addEventListener('click', () => {
-    let interval = (progressValueInput.value / 100) * (circumference / (periodicTimeInterval / 2));
     if (progressAnimateInput.checked) {
         periodicAnimationTimer = setInterval(() => {
-            counterToValue = 0;
-            const progressTimer = setInterval(() => {
-                if (counterToValue >= progressValueInput.value) {
-                    clearInterval(progressTimer);
-                    return;
-                }
-                counterToValue += interval;
-                setProgressValue(counterToValue);
-            }, parseInt(interval));
+            angleDeg = angleDeg > 360 ? 0 : angleDeg;
+            progressCircle.style.transform = `rotate(${angleDeg}deg)`;
+            angleDeg += 1;
         }, periodicTimeInterval);
     } else {
         clearInterval(periodicAnimationTimer);
+        angleDeg = -90;
+        progressCircle.style.transform = `rotate(${angleDeg}deg)`;
     }
 });
 

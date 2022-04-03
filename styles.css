@@ -31,6 +31,7 @@
 
 .progress-ring {
     align-self: center;
+    margin: 10px;
 }
 
 .progress-controls {
@@ -65,9 +66,7 @@
     z-index: 999;
 }
 
-.progress-ring__circle {
-    /* width: 100%;
-    height: 100%; */
+.progress-ring-circles {
     fill: none;
     stroke-width: 10px;
     transform-origin: center;
@@ -80,9 +79,4 @@
 
 #progress-ring-circle {
     stroke: #005bff;
-}
-
-svg circle:nth-child(2) {
-    stroke-dasharray: 6;
-    stroke-dashoffset: 3;
 }

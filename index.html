@@ -19,15 +19,15 @@
         </div>
         <div class="card-body">
             <svg class="progress-ring">
-                <circle class="progress-ring__circle" id="progress-ring-circle-back" cx="65" cy="65" r="60"/>
-                <circle class="progress-ring__circle" id="progress-ring-circle"cx="65" cy="65" r="60"/>
+                <circle class="progress-ring-circles" id="progress-ring-circle-back" cx="65" cy="65" r="60"/>
+                <circle class="progress-ring-circles" id="progress-ring-circle"cx="65" cy="65" r="60"/>
             </svg>
             <form class="progress-controls">
-                <input type="number" name="progress_value" value=70>
-                <label for="progress_value"> Value</label>
-                <input type="checkbox" name="progress_animate">
+                <input type="number" name="progress_value" value="42" min="0" max="100" placeholder="42" />
+                <label for=" progress_value"> Value</label>
+                <input type="checkbox" name="progress_animate" />
                 <label for="progress_animate"> Animate</label>
-                <input type="checkbox" name="progress_hide">
+                <input type="checkbox" name="progress_hide" />
                 <label for="progress_hide"> Hide</label>
             </form>
         </div>
