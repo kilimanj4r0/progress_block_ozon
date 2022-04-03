@@ -80,3 +80,21 @@
 #progress-ring-circle {
     stroke: #005bff;
 }
+
+.progress-controls {
+    margin: 10px;
+    /* width: 100%; */
+    display: flex;
+    flex-flow: column;
+}
+
+.progress-input {
+    width: 40px;
+    height: 20px;
+    margin-right: 20px;
+    margin-bottom: 15px;
+}
+
+.progress-controls-row {
+    justify-self: center;
+}
