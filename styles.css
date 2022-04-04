@@ -1,100 +1,91 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "century-gothic", sans-serif;
-    font-weight: bold;
-}
-
-.container {
-    height: 100vh;
-    padding: 20px;
-    display: flex;
-    flex-flow: column;
-    background: lightgreen;
-}
-
-.card-title {
-    /*w and h based on element*/
-    position: absolute;
-}
-
-.card-body {
-    /* Child */
-    flex: 1 1 auto;
-    /* Parent */
-    display: flex;
-    justify-content: space-between;
-    /* Other */
-    margin: 60px;
-}
-
-.progress-ring {
-    align-self: center;
-    margin: 10px;
-}
-
-.progress-controls {
-    align-self: center;
-    display: flex;
-    flex-flow: column;
-}
-
-
-/* For portrait */
-
-@media screen and (orientation: portrait) {
-    .card-body {
-        /* Parent */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "century-gothic", sans-serif;
+        font-weight: bold;
+    }
+    
+    .container {
+        height: 100vh;
+        padding: 20px;
+        display: flex;
         flex-flow: column;
+        background: lightgreen;
     }
-}
-
-
-/* For landscape */
-
-@media screen and (orientation: landscape) {
+    
+    .card-title {
+        /*w and h based on element*/
+        position: absolute;
+    }
+    
     .card-body {
-        /* Parent */
-        flex-flow: row;
+        /* As child */
+        flex: 1 1 auto;
+        /* As parent */
+        display: flex;
+        /* Other */
+        margin: 60px;
     }
-}
-
-.progress-ring {
-    width: 130px;
-    height: 130px;
-    z-index: 999;
-}
-
-.progress-ring-circles {
-    fill: none;
-    stroke-width: 10px;
-    transform-origin: center;
-    transform: rotate(-90deg);
-}
-
-#progress-ring-circle-back {
-    stroke: white;
-}
-
-#progress-ring-circle {
-    stroke: #005bff;
-}
-
-.progress-controls {
-    margin: 10px;
-    /* width: 100%; */
-    display: flex;
-    flex-flow: column;
-}
-
-.progress-input {
-    width: 40px;
-    height: 20px;
-    margin-right: 20px;
-    margin-bottom: 15px;
-}
-
-.progress-controls-row {
-    justify-self: center;
-}
+    
+    .progress-ring {
+        flex: 1 1 auto;
+        align-self: center;
+        display: flex;
+        max-width: 160px;
+        height: 160px;
+    }
+    
+    .progress-ring-circles {
+        fill: none;
+        stroke-width: 10px;
+        transform-origin: center;
+        transform: rotate(-90deg);
+    }
+    
+    #progress-ring-circle-back {
+        stroke: white;
+    }
+    
+    #progress-ring-circle {
+        stroke: #005bff;
+        z-index: 999;
+    }
+    
+    .progress-controls {
+        flex: 1 1 auto;
+        align-self: center;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        max-width: 160px;
+        height: 160px;
+        margin: auto;
+    }
+    
+    .progress-input {
+        width: 40px;
+        height: 20px;
+        margin-right: 20px;
+        margin-bottom: 15px;
+    }
+    /* For portrait */
+    
+    @media screen and (orientation: portrait) {
+        .card-body {
+            flex-direction: column;
+        }
+        .progress-ring {
+            margin: 0px auto auto;
+        }
+    }
+    /* For landscape */
+    
+    @media screen and (orientation: landscape) {
+        .card-body {
+            flex-direction: row;
+        }
+        .progress-ring {
+            margin: auto auto auto 0;
+        }
+    }
