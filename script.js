@@ -1,74 +1,110 @@
-const progressRing = document.querySelector('.progress-ring');
-
-const progressCircle = document.querySelector('#progress-ring-circle');
-const radius = progressCircle.getAttribute('r');
-const circumference = 2 * Math.PI * radius;
-
-const progressValueInput = document.querySelector('#progress-value');
-const progressAnimateInput = document.querySelector('#progress-animate');
-const progressHideInput = document.querySelector('#progress-hide');
-
-// Value
-const setProgressValue = (value) => {
-    const offset = circumference * (1 - value / 100);
-    progressCircle.style.strokeDashoffset = offset;
-};
-// Nullify the circle
-setProgressValue(progressValueInput.value);
-progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-// progressCircle.style.strokeDashoffset = circumference;
-
-// Instantenous changing
-progressValueInput.oninput = () => {
-    progressValueInput.value = parseFloat(progressValueInput.value);
-    if (progressValueInput.value > 100) {
-        progressValueInput.value = 100;
-    } else if (progressValueInput.value < 0) {
-        progressValueInput.value = 0;
+class Component {
+    constructor(selector) {
+        this.$node = document.querySelector(selector);
     }
-    setProgressValue(progressValueInput.value);
-};
-// Changing after exit the input field
-// progressValueInput.addEventListener('change', () => {
-//     progressValueInput.value = parseFloat(progressValueInput.value);
-//     if (progressValueInput.value > 100) {
-//         progressValueInput.value = 100;
-//     } else if (progressValueInput.value < 0) {
-//         progressValueInput.value = 0;
-//     }
-//     setProgressValue(progressValueInput.value);
-// });
+}
+class ProgressRing extends Component {
+    constructor(options) {
+        super(options.ringSelector)
+        this._setControls(options.controls);
+        this.circle = new ProgressCircle(options.circleSelector);
+        this.setProgressValue(this.progressValue);
+    }
 
-// Animate
-let periodicAnimationTimer;
-let periodicTimeInterval = 10;
-let angleDeg = -90;
-progressAnimateInput.addEventListener('click', () => {
-    if (progressAnimateInput.checked) {
-        periodicAnimationTimer = setInterval(() => {
-            angleDeg = angleDeg > 360 ? 0 : angleDeg;
-            progressCircle.style.transform = `rotate(${angleDeg}deg)`;
-            angleDeg += 1;
-        }, periodicTimeInterval);
-    } else {
-        clearInterval(periodicAnimationTimer);
-        angleDeg = -90;
-        progressCircle.style.transform = `rotate(${angleDeg}deg)`;
+    get progressValue() {
+        return this.$nodeValue.value;
+    }
+
+    set progressValue(value) {
+        this.$nodeValue.value = value;
+    }
+
+    setProgressValue() {
+        this._checkProgressValueBounds();
+        const offset = this.circle.circumference * (1 - this.progressValue / 100);
+        this.circle.$node.style.strokeDashoffset = offset;
+    }
+
+    animate() {
+        this._periodicAnimationTimer = setInterval(() => {
+            this._angleDegAnimationTransform = this._angleDegAnimationTransform > 360 ? 0 : this._angleDegAnimationTransform;
+            this.circle.$node.style.transform = `rotate(${this._angleDegAnimationTransform}deg)`;
+            this._angleDegAnimationTransform += 1;
+        }, this._periodicTimeInterval);
+    }
+
+    stopAnimation() {
+        clearInterval(this._periodicAnimationTimer);
+        this._angleDegAnimationTransform = -90;
+        this.circle.$node.style.transform = `rotate(${this._angleDegAnimationTransform}deg)`;
+
+    }
+
+    hide() {
+        this.$node.style.visibility = 'hidden';
+    }
+
+    show() {
+        this.$node.style.visibility = 'visible';
+    }
+
+    _checkProgressValueBounds() {
+        this.progressValue = parseFloat(this.progressValue);
+        if (this.progressValue > 100) {
+            this.progressValue = 100;
+        } else if (this.progressValue < 0) {
+            this.progressValue = 0;
+        }
+    }
+
+    _setControls(controls) {
+        this.$nodeValue = document.querySelector(controls.valueSelector);
+        this.$nodeAnimate = document.querySelector(controls.animateSelector);
+        this._periodicAnimationTimer;
+        this._periodicAnimationTimeInterval = 10;
+        this._angleDegAnimationTransform = -90;
+        this.$nodeHide = document.querySelector(controls.hideSelector);
+    }
+}
+class ProgressCircle extends Component {
+    constructor(options) {
+        super(options)
+        this._radius = this.$node.getAttribute('r');
+        this._circumference = 2 * Math.PI * this._radius;
+        this.$node.style.strokeDasharray = `${this._circumference} ${this._circumference}`;
+    }
+
+    get circumference() {
+        return this._circumference;
+    }
+}
+
+
+const pRing = new ProgressRing({
+    ringSelector: '.progress-ring',
+    circleSelector: '#progress-ring-circle',
+    controls: {
+        valueSelector: '#progress-value',
+        animateSelector: '#progress-animate',
+        hideSelector: '#progress-hide'
     }
 });
-
+// Value
+pRing.$nodeValue.oninput = () => {
+    pRing.setProgressValue();
+};
+// Animate
+pRing.$nodeAnimate.addEventListener('click', () => {
+    if (pRing.$nodeAnimate.checked) {
+        pRing.animate();
+    } else {
+        pRing.stopAnimation();
+    }
+});
 // Hide
-const hideProgressRing = () => {
-    progressRing.style.visibility = 'hidden';
-    // progressRing.style.display = 'none';
-};
-const showProgressRing = () => {
-    progressRing.style.visibility = 'visible';
-    // progressRing.style.display = 'block';
-};
-progressHideInput.addEventListener('click', () => {
-    if (progressHideInput.checked)
-        hideProgressRing();
+pRing.$nodeHide.addEventListener('click', () => {
+    if (pRing.$nodeHide.checked)
+        pRing.hide();
     else
-        showProgressRing();
+        pRing.show();
 });
