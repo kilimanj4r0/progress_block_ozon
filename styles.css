@@ -2,9 +2,11 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        /* To insert Ozon's font */
         font-family: "century-gothic", sans-serif;
         font-weight: bold;
         font-size: 14px;
+        color: #000;
     }
     
     .container {
@@ -16,7 +18,6 @@
     }
     
     .card-title {
-        /*w and h based on element*/
         position: absolute;
     }
     
@@ -45,14 +46,11 @@
     }
     
     #progress-ring-circle-back {
-        /* stroke: #dfe6f0; */
-        /* stroke: #eff2f5; */
         stroke: rgba(0, 26, 52, 0.1);
     }
     
     #progress-ring-circle {
         stroke: #005bff;
-        /* stroke: rgb(0, 91, 255); */
         z-index: 999;
     }
     
@@ -92,11 +90,10 @@
         width: 46px;
         height: 30px;
         margin-right: 20px;
-        border-radius: 3em;
+        border-radius: 100em;
         text-align: center;
         border-color: #000;
         border-width: 1px;
-        font-size: 1em;
     }
     
     .progress-input::-webkit-inner-spin-button,
@@ -122,9 +119,8 @@
         margin-right: 20px;
         width: 46px;
         height: 30px;
-        /* clip-path: rect(0 0 0 0);
         color: transparent;
-        user-select: none; */
+        user-select: none;
     }
     
     .progress-switch-label::before,
@@ -139,7 +135,7 @@
         width: 46px;
         height: 30px;
         background-color: rgba(0, 26, 52, 0.1);
-        border-radius: 1em;
+        border-radius: 100em;
         transition: background-color 0.25s ease;
     }
     
@@ -148,7 +144,7 @@
         left: 2px;
         height: 26px;
         width: 26px;
-        border-radius: 1em;
+        border-radius: 50%;
         background-color: #fff;
         transition: left 0.25s ease;
     }
