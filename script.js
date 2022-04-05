@@ -4,9 +4,9 @@ const progressCircle = document.querySelector('#progress-ring-circle');
 const radius = progressCircle.getAttribute('r');
 const circumference = 2 * Math.PI * radius;
 
-const progressValueInput = document.querySelector('input[name="progress_value"]');
-const progressAnimateInput = document.querySelector('input[name="progress_animate"]');
-const progressHideInput = document.querySelector('input[name="progress_hide"]');
+const progressValueInput = document.querySelector('#progress-value');
+const progressAnimateInput = document.querySelector('#progress-animate');
+const progressHideInput = document.querySelector('#progress-hide');
 
 // Value
 const setProgressValue = (value) => {

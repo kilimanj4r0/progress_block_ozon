@@ -4,6 +4,7 @@
         box-sizing: border-box;
         font-family: "century-gothic", sans-serif;
         font-weight: bold;
+        font-size: 14px;
     }
     
     .container {
@@ -11,7 +12,7 @@
         padding: 20px;
         display: flex;
         flex-flow: column;
-        background: lightgreen;
+        background: #fff;
     }
     
     .card-title {
@@ -44,11 +45,14 @@
     }
     
     #progress-ring-circle-back {
-        stroke: white;
+        /* stroke: #dfe6f0; */
+        /* stroke: #eff2f5; */
+        stroke: rgba(0, 26, 52, 0.1);
     }
     
     #progress-ring-circle {
         stroke: #005bff;
+        /* stroke: rgb(0, 91, 255); */
         z-index: 999;
     }
     
@@ -61,13 +65,6 @@
         max-width: 160px;
         height: 160px;
         margin: auto;
-    }
-    
-    .progress-input {
-        width: 40px;
-        height: 20px;
-        margin-right: 20px;
-        margin-bottom: 15px;
     }
     /* For portrait */
     
@@ -88,4 +85,78 @@
         .progress-ring {
             margin: auto auto auto 0;
         }
+    }
+    /* Custom Input fields*/
+    
+    .progress-input {
+        width: 46px;
+        height: 30px;
+        margin-right: 20px;
+        border-radius: 3em;
+        text-align: center;
+        border-color: #000;
+        border-width: 1px;
+        font-size: 1em;
+    }
+    
+    .progress-input::-webkit-inner-spin-button,
+    .progress-input::-webkit-outer-spin-button {
+        appearance: none;
+        margin: 0;
+    }
+    
+    .progress-controls-row {
+        position: relative;
+        display: inline-block;
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    
+    .progress-switch-input {
+        display: none;
+    }
+    
+    .progress-switch-label {
+        display: inline-block;
+        margin-right: 20px;
+        width: 46px;
+        height: 30px;
+        /* clip-path: rect(0 0 0 0);
+        color: transparent;
+        user-select: none; */
+    }
+    
+    .progress-switch-label::before,
+    .progress-switch-label::after {
+        content: "";
+        display: block;
+        position: absolute;
+        cursor: pointer;
+    }
+    
+    .progress-switch-label::before {
+        width: 46px;
+        height: 30px;
+        background-color: rgba(0, 26, 52, 0.1);
+        border-radius: 1em;
+        transition: background-color 0.25s ease;
+    }
+    
+    .progress-switch-label::after {
+        top: 2px;
+        left: 2px;
+        height: 26px;
+        width: 26px;
+        border-radius: 1em;
+        background-color: #fff;
+        transition: left 0.25s ease;
+    }
+    
+    .progress-switch-input:checked+.progress-switch-label::before {
+        background-color: #005bff;
+    }
+    
+    .progress-switch-input:checked+.progress-switch-label::after {
+        left: 18px;
     }
