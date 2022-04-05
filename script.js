@@ -95,11 +95,10 @@ pRing.$nodeValue.oninput = () => {
 };
 // Animate
 pRing.$nodeAnimate.addEventListener('click', () => {
-    if (pRing.$nodeAnimate.checked) {
+    if (pRing.$nodeAnimate.checked)
         pRing.animate();
-    } else {
+    else
         pRing.stopAnimation();
-    }
 });
 // Hide
 pRing.$nodeHide.addEventListener('click', () => {

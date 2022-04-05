@@ -26,8 +26,6 @@
         flex: 1 1 auto;
         /* As parent */
         display: flex;
-        /* Other */
-        margin: 60px;
     }
     
     .progress-ring {
@@ -69,9 +67,10 @@
     @media screen and (orientation: portrait) {
         .card-body {
             flex-direction: column;
+            margin: 60px auto;
         }
         .progress-ring {
-            margin: 0px auto auto;
+            margin: 0 auto auto;
         }
     }
     /* For landscape */
@@ -79,6 +78,7 @@
     @media screen and (orientation: landscape) {
         .card-body {
             flex-direction: row;
+            margin: auto 60px;
         }
         .progress-ring {
             margin: auto auto auto 0;
